@@ -161,11 +161,7 @@ public class Utility {
 	 * @return
 	 */
 	public static boolean hasData(Object input) {
-		if (isBlank(input)) {
-			return true;
-		} else {
-			return false;
-		}
+			return !isBlank(input);
 	}
 	/**
 	 * This method returns the replace of all speccial characters and spaces with undersocre( _ )

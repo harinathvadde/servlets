@@ -1,10 +1,10 @@
 package de.zeroco.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,11 +18,9 @@ public class GetAllServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public void service(HttpServletRequest req, HttpServletResponse res) throws IOException {
+	public void service(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		List<Map<String, Object>> output = RegistrationService.getAll();
-		PrintWriter pw = res.getWriter();
-		for (Map<String, Object> map : output) {
-			pw.println(map);
-		}
+		req.setAttribute("data", output);
+		req.getRequestDispatcher("Get.jsp").forward(req, res);
 	}
 }

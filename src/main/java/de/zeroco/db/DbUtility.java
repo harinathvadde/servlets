@@ -210,7 +210,7 @@ public class DbUtility {
 		}
 		return list;	
 	}
-	public static List<Map<String, Object>> get(Connection conn, String schema, String tableName, List<String> columns, String refClmn, String id){
+	public static List<Map<String, Object>> list(Connection conn, String schema, String tableName, List<String> columns, String refClmn, String id){
 		return get(conn, schema, tableName, columns, QueryBuilder.getDataQuery(schema, tableName, columns, refClmn, id));
 	}
 	public final static String TABLE_NAME = "user_details";
