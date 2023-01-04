@@ -1,25 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>zc_employee</display-name>
-  <servlet>
-  <servlet-name>sum</servlet-name>
-  <servlet-class>de.zeroco.servlet.AddServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  <servlet-name>sum</servlet-name>
-  <url-pattern>/add</url-pattern>
-  </servlet-mapping>
-  <servlet>
-  <servlet-name>login</servlet-name>
-  <servlet-class>de.zeroco.servlet.LoginPage</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  <servlet-name>login</servlet-name>
-  <url-pattern>/loginpage</url-pattern>
-  </servlet-mapping>
-  
-  
-  
   
   <servlet>
   <servlet-name>reg</servlet-name>
@@ -49,6 +30,16 @@
   </servlet-mapping>
   
   <servlet>
+  <servlet-name>getall</servlet-name>
+  <servlet-class>de.zeroco.servlet.GetAllServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>getall</servlet-name>
+  <url-pattern>/getall</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
   <servlet-name>delete</servlet-name>
   <servlet-class>de.zeroco.servlet.DeleteServlet</servlet-class>
   </servlet>
@@ -56,4 +47,14 @@
   <servlet-name>delete</servlet-name>
   <url-pattern>/deletedata</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+  <servlet-name>login</servlet-name>
+  <servlet-class>de.zeroco.servlet.LogInServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>login</servlet-name>
+  <url-pattern>/loginpage</url-pattern>
+  </servlet-mapping>
+
 </web-app>

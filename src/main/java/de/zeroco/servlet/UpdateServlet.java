@@ -21,8 +21,9 @@ public class UpdateServlet extends HttpServlet {
 		String email = req.getParameter("email");
 		String phno = req.getParameter("phno");
 		String dob = req.getParameter("dob");
-		String userId = req.getParameter("id");
-		String output = RegistrationService.updateData(name, email, phno, dob, userId);
+		String pass = req.getParameter("pass");
+		String id = req.getParameter("id");
+		String output = RegistrationService.updateData(name, email, phno, dob, pass, id);
 		PrintWriter pw = res.getWriter();
 		pw.println("<h3>data added to database and id : " + output + "</h3>");
 	}

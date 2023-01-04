@@ -98,6 +98,8 @@ public class Utility {
 	 */
 	@SuppressWarnings("unused")
 	public static boolean isBlank(Object input) {
+		if(input==null) 
+			return true;
 		try {
 			if (input instanceof String) {
 				String stringvar = (String) input;

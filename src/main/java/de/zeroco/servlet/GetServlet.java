@@ -19,9 +19,11 @@ public class GetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void service(HttpServletRequest req, HttpServletResponse res) throws IOException {
-		String userId = req.getParameter("id");
-		List<Map<String, Object>> output = RegistrationService.get(userId);
+		String email = req.getParameter("email");
+		List<Map<String, Object>> output = RegistrationService.get(email);
 		PrintWriter pw = res.getWriter();
-		pw.println(output);
+		for (Map<String, Object> map : output) {
+			pw.println(map);
+		}
 	}
 }

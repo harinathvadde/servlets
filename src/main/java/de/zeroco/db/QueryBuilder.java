@@ -1,5 +1,6 @@
 package de.zeroco.db;
 
+import java.util.Arrays;
 import java.util.List;
 
 import de.zeroco.assignment.Utility;
@@ -10,10 +11,10 @@ public class QueryBuilder {
 	
 	public static void main(String[] args) {
 	
-		//List<String> columns = new ArrayList<String>(Arrays.asList());
+		List<String> columns = Arrays.asList();
 		//System.out.println(getUpdateQuery("zerocode", "emp", columns, "pk_id"));
-		System.out.println(getDeleteQuery("zerocode", "emp", "empin", "ABC@103"));
-		//System.out.println(getClmnsDataQuery("zerocode", "emp", columns));
+		//System.out.println(getDeleteQuery("zerocode", "emp", "empin", "ABC@103"));
+		System.out.println(getClmnsDataQuery("zerocode", "emp", columns));
 		//System.out.println(getDataQuery("zerocode", "emp", columns, "empid", "ABC@109"));
 		//System.out.println(getCreateTableQuery("zerocode", "subjects", columns));
 		//System.out.println(getInnerJoinQuery("schema", "emp", "location", columns, columns, "name", "name", "INNER"));

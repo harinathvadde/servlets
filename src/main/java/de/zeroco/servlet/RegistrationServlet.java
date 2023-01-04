@@ -21,7 +21,8 @@ public class RegistrationServlet extends HttpServlet{
 			String email = req.getParameter("email");
 			String phno = req.getParameter("phno");
 			String dob = req.getParameter("dob");
-			int id = RegistrationService.getInsertedId(name, email, phno, dob);
+			String password = req.getParameter("pass");
+			int id = RegistrationService.getInsertedId(name, email, phno, dob, password);
 			PrintWriter pw = res.getWriter();
 			pw.println("data added to database and id : " + id );
 		}
