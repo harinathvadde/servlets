@@ -1,14 +1,13 @@
 package de.zeroco.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import de.zeroco.dao.RegistrationDao;
 import de.zeroco.service.RegistrationService;
 
 public class DeleteServlet extends HttpServlet {
@@ -20,11 +19,14 @@ public class DeleteServlet extends HttpServlet {
 
 	public void service(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		String email = req.getParameter("email");
-		String output = RegistrationService.deleteData(email);
-		PrintWriter pw = res.getWriter();
-		pw.println(output);
-		res.setContentType("text/html");
-		RequestDispatcher rs = req.getRequestDispatcher("Delete.html");
-		rs.include(req, res);
+		if (RegistrationDao.checkEmailPhno(email, null)) {
+			String output = RegistrationService.deleteData(email);
+			req.setAttribute("delete", output);
+			req.getRequestDispatcher("Delete.jsp").forward(req, res);
+		} else {
+			req.setAttribute("delete", "No..Records Found..!");
+			req.getRequestDispatcher("Delete.jsp").forward(req, res);
+		}
+		
 	} 
 }

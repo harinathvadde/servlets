@@ -19,8 +19,8 @@ public class GetAllServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void service(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-		List<Map<String, Object>> output = RegistrationService.getAll();
-		req.setAttribute("data", output);
-		req.getRequestDispatcher("Get.jsp").forward(req, res);
+		List<Map<String, Object>> listOfUsers = RegistrationService.getAll();
+		req.setAttribute("data", listOfUsers);
+		req.getRequestDispatcher("GetOutput.jsp").forward(req, res);	
 	}
 }

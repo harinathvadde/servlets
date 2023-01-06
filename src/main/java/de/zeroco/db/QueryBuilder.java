@@ -14,7 +14,7 @@ public class QueryBuilder {
 		List<String> columns = Arrays.asList();
 		//System.out.println(getUpdateQuery("zerocode", "emp", columns, "pk_id"));
 		//System.out.println(getDeleteQuery("zerocode", "emp", "empin", "ABC@103"));
-		System.out.println(getClmnsDataQuery("zerocode", "emp", columns));
+		System.out.println(getColsDataQuery("zerocode", "emp", columns));
 		//System.out.println(getDataQuery("zerocode", "emp", columns, "empid", "ABC@109"));
 		//System.out.println(getCreateTableQuery("zerocode", "subjects", columns));
 		//System.out.println(getInnerJoinQuery("schema", "emp", "location", columns, columns, "name", "name", "INNER"));
@@ -80,7 +80,7 @@ public class QueryBuilder {
 	 * @param columns
 	 * @return String Query
 	 */
-	public static String getClmnsDataQuery(String schema, String tableName, List<?> columns) {
+	public static String getColsDataQuery(String schema, String tableName, List<?> columns) {
 		String clmn = "";
 		for (Object column : columns) {
 			clmn += "," + GRAVE + column + GRAVE;

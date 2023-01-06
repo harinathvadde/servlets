@@ -7,11 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p><h3>GET DATA</h3><P>
-<form action="getdata" method="post">
-<h4>${msg}</h4>
-	Emain Id : <input type = "text" name = "email"/><br>
+<p><h3>DELETE DATA</h3><P>
+<form action="deletedata" method="post">
+	<h4>${delete}</h4>
+	<h4>${msg}</h4>
+	Email Id : <input type = "text" name = "email"/><br>
 	<input type = "submit" value = "submit"/>
-</form>
+	</form>
 </body>
 </html>

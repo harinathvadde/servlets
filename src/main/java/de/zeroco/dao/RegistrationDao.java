@@ -11,7 +11,6 @@ import java.util.Map;
 
 import de.zeroco.assignment.Utility;
 import de.zeroco.db.DbUtility;
-import de.zeroco.db.HidePassword;
 import de.zeroco.db.QueryBuilder;
 
 public class RegistrationDao {
@@ -27,24 +26,23 @@ public class RegistrationDao {
 
 	/**
 	 * This method is used to insert data into db
-	 * 
 	 * @author HARINATH
 	 * @since 04/01/2023
 	 * @param name
 	 * @param email
-	 * @param phno
+	 * @param phone
 	 * @param dob
 	 * @param age
 	 * @param password
 	 * @return id
 	 */
-	public static int getInsertedId(String name, String email, String phno, Date dob, int age, String password) {
+	public static int getInsertedId(String name, String email, String phone, Date dob, int age, String password) {
 		Connection conn = null;
 		int id = 0;
 		try {
 			conn = DbUtility.getDbConnect(USER, PASSWORD, SCHEMA);
 			id = DbUtility.getGenerateKey(conn, SCHEMA, TABLE_NAME, TABLE_COL,
-					Arrays.asList(name, email, phno, dob, age, password));
+					Arrays.asList(name, email, phone, dob, age, password));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -55,7 +53,6 @@ public class RegistrationDao {
 
 	/**
 	 * This method is used to check email and phno already exist or not in database
-	 * 
 	 * @author HARINATH
 	 * @since 04/01/2023
 	 * @param email
@@ -110,7 +107,7 @@ public class RegistrationDao {
 		try {
 			conn = DbUtility.getDbConnect(USER, PASSWORD, SCHEMA);
 			output = DbUtility.get(conn, SCHEMA, TABLE_NAME, TABLE_COL,
-					QueryBuilder.getClmnsDataQuery(SCHEMA, TABLE_NAME, Arrays.asList()));
+					QueryBuilder.getColsDataQuery(SCHEMA, TABLE_NAME, Arrays.asList()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -154,7 +151,7 @@ public class RegistrationDao {
 			conn = DbUtility.getDbConnect(USER, PASSWORD, SCHEMA);
 			ps = conn.prepareStatement("select * from " + TABLE_NAME + " where email=? and password=?");
 			ps.setString(1, email);
-			ps.setString(2, HidePassword.encryptPassword(password));
+			ps.setString(2, DbUtility.encryptPassword(password));
 			ResultSet rs = ps.executeQuery();
 			output = rs.next();
 		} catch (SQLException e) {
@@ -177,12 +174,15 @@ public class RegistrationDao {
 		String res = null;
 		try {
 			conn = DbUtility.getDbConnect(USER, PASSWORD, SCHEMA);
-			res = DbUtility.updateTableData(conn, SCHEMA, TABLE_NAME, col, data, "pk_id");
+			res = DbUtility.updateTableData(conn, SCHEMA, TABLE_NAME, col, data, "email");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DbUtility.closeDbConnection(conn);
 		}
 		return res;
+	}
+	public static void main(String[] args) {
+		System.out.println(checkEmailPhno(null, "9652754858"));
 	}
 }

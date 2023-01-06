@@ -9,9 +9,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
 
 import de.zeroco.assignment.Utility;
 
@@ -107,7 +110,7 @@ public class DbUtility {
 				psmt.setObject(count ++, value);
 			}
 			psmt.executeUpdate();
-			return refClmn + " updated successfully.";
+			return " updated successfully.";
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -130,7 +133,7 @@ public class DbUtility {
 		Statement smt = null;
 		try {
 			smt = conn.createStatement();
-			ResultSet res = smt.executeQuery(QueryBuilder.getClmnsDataQuery(schema, tableName, columns));
+			ResultSet res = smt.executeQuery(QueryBuilder.getColsDataQuery(schema, tableName, columns));
 			ResultSetMetaData rsmd = res.getMetaData();
 			while (res.next()) {
 				for (int i = 1; i < rsmd.getColumnCount()+1; i++) {
@@ -224,5 +227,29 @@ public class DbUtility {
 		Connection conn = getDbConnect(user, password, schema);
 		System.out.println(deleteData(conn, schema, TABLE_NAME, "pk_id", "2"));
 		closeDbConnection(conn);
+	}
+	/**
+	 * This method is used to encrypt the password given by user 
+	 * @author HARINATH
+	 * @since 04/01/2023
+	 * @param password
+	 * @return encrypted password
+	 */
+	public static String encryptPassword(String password) {
+		if (Utility.isBlank(password)) return "";
+		Encoder encoder = Base64.getEncoder();
+		return encoder.encodeToString(password.getBytes());
+	}
+	/**
+	 * This method is used to decrypt the password stored in db 
+	 * @author HARINATH
+	 * @since 04/01/2023
+	 * @param password
+	 * @return String decypted password
+	 */
+	public static String decryptPassword(String password) {
+		if (Utility.isBlank(password)) return "";
+		Decoder decoder = Base64.getDecoder();
+		return new String(decoder.decode(password));
 	}
 }

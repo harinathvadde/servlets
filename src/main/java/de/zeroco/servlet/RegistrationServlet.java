@@ -1,9 +1,7 @@
 package de.zeroco.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,21 +20,16 @@ public class RegistrationServlet extends HttpServlet {
 	public void service(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		String name = req.getParameter("name");
 		String email = req.getParameter("email");
-		String phno = req.getParameter("phno");
+		String phone = req.getParameter("phone");
 		String dob = req.getParameter("dob");
 		String password = req.getParameter("password");
-		PrintWriter pw = res.getWriter();
-		if (RegistrationDao.checkEmailPhno(email, phno)) { 
-			pw.println("user email or phone number already exist");
-			res.setContentType("text/html");
-			RequestDispatcher rs = req.getRequestDispatcher("Registration.html");
-			rs.include(req, res);
+		if (RegistrationDao.checkEmailPhno(email, phone)) { 
+			req.setAttribute("insertFailed", "Registration Failed..! Email or Phone number already exist.");
+			req.getRequestDispatcher("Registration.jsp").forward(req, res);
 		} else {
-			int id = RegistrationService.getInsertedId(name, email, phno, dob, password);
-			pw.println("data added to database and id : " + id + " for user : " + name);
-			res.setContentType("text/html");
-			RequestDispatcher rs = req.getRequestDispatcher("Registration.html");
-			rs.include(req, res);
+			int id = RegistrationService.getInsertedId(name, email, phone, dob, password);
+			req.setAttribute("insertSuccess", "data added to database and id : " + id + " for user : " + name);
+			req.getRequestDispatcher("Registration.jsp").forward(req, res);
 		}
 	}
 }

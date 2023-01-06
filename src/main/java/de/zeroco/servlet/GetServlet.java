@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import de.zeroco.dao.RegistrationDao;
 import de.zeroco.service.RegistrationService;
 
 public class GetServlet extends HttpServlet {
@@ -20,8 +21,13 @@ public class GetServlet extends HttpServlet {
 
 	public void service(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		String email = req.getParameter("email");
-		List<Map<String, Object>> output = RegistrationService.get(email);
-		req.setAttribute("data", output);
-		req.getRequestDispatcher("Get.jsp").forward(req, res);;
+		if (RegistrationDao.checkEmailPhno(email, null)) {
+			List<Map<String, Object>> userList = RegistrationService.get(email);
+			req.setAttribute("data", userList);
+			req.getRequestDispatcher("GetOutput.jsp").forward(req, res);
+		} else {
+			req.setAttribute("msg", "No records found..!");
+			req.getRequestDispatcher("Get.jsp").forward(req, res);
+		}
 	}
 }
